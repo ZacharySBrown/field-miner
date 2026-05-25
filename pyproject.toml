@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=69.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "field-miner"
+version = "0.1.0"
+description = "Mine field recordings for musically interesting ambient/IDM snippets"
+requires-python = ">=3.11"
+dependencies = [
+    "librosa>=0.10",
+    "soundfile>=0.12",
+    "pydub>=0.25",
+    "numpy>=1.26",
+    "scipy>=1.12",
+    "tqdm>=4.66",
+    "rich>=13.7",
+    "click>=8.1",
+    "pandas>=2.2",
+    "pydantic>=2.6",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+yamnet = [
+    "tensorflow>=2.15",
+    "tensorflow-hub>=0.16",
+]
+pedalboard = [
+    "pedalboard>=0.9",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+    "matplotlib>=3.8",
+]
+all = [
+    "field-miner[yamnet,pedalboard,dev]",
+]
+
+[project.scripts]
+field-miner = "field_miner.cli:cli"
+
+[tool.setuptools.packages.find]
+include = ["field_miner*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

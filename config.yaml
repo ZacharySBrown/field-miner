@@ -1,0 +1,86 @@
+# Field Miner — Default Configuration
+
+# Input/output
+input_dir: ./recordings
+output_dir: ./mined_clips
+cache_dir: ./.cache
+
+# Windowing
+window_size: 20        # seconds
+hop_size: 5            # seconds
+min_clip_duration: 10  # floor for export
+max_clip_duration: 60  # ceiling for export
+
+# File filtering
+min_file_duration: 30  # skip files shorter than this (seconds)
+normalize_sr: 44100
+normalize_channels: 1  # mono downmix
+include_pattern: null  # optional glob filter, e.g. "iceland_*"
+
+# Scoring weights (must sum to 1.0)
+weights:
+  spectral_dynamism: 0.25
+  textural_richness: 0.20
+  timbral_movement: 0.20
+  event_interest: 0.15
+  dynamic_range: 0.10
+  harmonic_content: 0.10
+
+# Filtering
+silence_threshold_dbfs: -60
+clipping_threshold: 0.99
+reject_labels:
+  - Speech
+  - Conversation
+  - "Narration, monologue"
+  - Singing
+  - Screaming
+  - Child speech
+  - Traffic noise
+  - Car
+  - Motorcycle
+  - Siren
+  - Air horn
+  - Truck
+  - Static
+  - White noise
+  - Hum
+
+prefer_labels:
+  - Bird
+  - Birdsong
+  - Water
+  - Stream
+  - Rain
+  - Wind
+  - Rustling leaves
+  - Insect
+  - Cricket
+  - Frog
+  - "Waves, surf"
+  - Fire
+  - Thunder
+  - Waterfall
+  - Forest
+  - Ambient music
+
+wind_noise_penalty: 0.6
+
+# Deduplication
+dedup_temporal_overlap: 0.5
+dedup_embedding_similarity: 0.92
+
+# Export
+max_clips_per_file: 10
+max_total_clips: 500
+min_score_threshold: 0.50
+normalize_output: false
+fade_in_ms: 50
+fade_out_ms: 100
+score_loops: false
+ableton_export: false
+
+# Performance
+yamnet_every_n_windows: 3
+n_workers: 4
+fast: false
